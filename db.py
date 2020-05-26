@@ -16,11 +16,15 @@ class User(db.Model):
     Defines a User.
 
     Fields:
-    1) name: the user's display name
+    1) display_name: the user's display name
+    2) username: the user's username
+    3) password: the user's password (hashed)
     """
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
+    display_name = db.Column(db.String, nullable=False)
+    username = db.Column(db.String, nullable=False, unique=True)
+    password = db.Column(db.String, nullable=False)
 
 
     def serialize(self):
@@ -29,7 +33,9 @@ class User(db.Model):
         """
         return {
             "id": self.id, 
-            "name": self.name
+            "display_name": self.display_name,
+            "username": self.username, 
+            "password": self.password
         }
 
 
