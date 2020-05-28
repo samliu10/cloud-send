@@ -22,9 +22,10 @@ class User(db.Model):
     """
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
-    display_name = db.Column(db.String, nullable=False)
-    username = db.Column(db.String, nullable=False, unique=True)
-    password = db.Column(db.String, nullable=False)
+    display_name = db.Column(db.String, nullable=False, unique=True)
+    # username password has not been implemented yet
+    # username = db.Column(db.String, nullable=False, unique=True)
+    # password = db.Column(db.String, nullable=False)
 
 
     def serialize(self):
@@ -34,8 +35,8 @@ class User(db.Model):
         return {
             "id": self.id, 
             "display_name": self.display_name,
-            "username": self.username, 
-            "password": self.password
+            # "username": self.username, 
+            # "password": self.password
         }
 
 
