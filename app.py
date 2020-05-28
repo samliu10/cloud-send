@@ -7,7 +7,7 @@ Date last modified: May 26, 2020
 
 import json
 from flask import Flask, request, render_template
-from db import db
+from db import db, User
 import csv
 
 # define db filename
@@ -28,3 +28,24 @@ with app.app_context():
 @app.route("/")
 def home():
     return render_template("index.html")
+
+
+@app.route("/user/", methods=["POST"])
+def user():
+    # get form info
+    display_name = request.form.get("displayName")
+    # check if display name is already taken
+    if User.query.filter_by(display_name=display_name).count() != 0:
+        return render_template("index.html", message="That display name is already taken.")
+    new_user = User(display_name=display_name)
+    db.session.add(new_user)
+    db.session.commit()
+    return render_template("user.html", name=display_name)
+
+
+
+
+
+app.run()
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000, debug=True)
