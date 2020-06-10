@@ -22,7 +22,8 @@ export default () => {
 
             </Jumbotron>
 
-
+            <img className="gradient-img" src={require('./images/gradient.png')}
+                alt="Gradient"></img>
             <img className="home-img" src={require('./images/home_image.png')}
                 alt="Guy Holding Phone"></img>
         </div>
